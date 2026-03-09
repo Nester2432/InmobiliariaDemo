@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRADIN INMOBILIARIA — Propiedades en Rosario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy: #0d1f3c;
+      --navy-mid: #1a3560;
+      --gold: #c9a96e;
+      --gold-light: #e6c98a;
+      --blue-bright: #2d6ef5;
+      --white: #ffffff;
+      --off-white: #f8f7f5;
+      --gray-light: #eef0f4;
+      --gray-mid: #b0b8c9;
+      --gray-dark: #6b7590;
+      --text: #1a1f2e;
+      --shadow-sm: 0 2px 12px rgba(13,31,60,0.07);
+      --shadow-md: 0 8px 32px rgba(13,31,60,0.12);
+      --shadow-lg: 0 20px 60px rgba(13,31,60,0.18);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 72px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(13,31,60,0.07);
+      transition: var(--transition);
+    }
+    .navbar.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--navy);
+    }
+    .nav-logo-text span:last-child {
+      font-size: 0.6rem; font-weight: 500; letter-spacing: 0.25em;
+      color: var(--gold); text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--navy);
+      font-size: 0.875rem; font-weight: 500;
+      padding: 6px 14px; border-radius: var(--radius-sm);
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { background: var(--gray-light); color: var(--blue-bright); }
+    .btn-nav-cta {
+      background: var(--navy) !important;
+      color: var(--white) !important;
+      padding: 9px 20px !important;
+      border-radius: var(--radius-sm) !important;
+    }
+    .btn-nav-cta:hover { background: var(--navy-mid) !important; transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--navy); border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 40%, #0d2a5e 100%);
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(45,110,245,0.15) 0%, transparent 70%);
+    }
+    /* Floating shapes */
+    .hero-shape {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.12; pointer-events: none;
+    }
+    .hero-shape-1 { width: 500px; height: 500px; background: var(--blue-bright); top: -100px; right: -100px; animation: floatA 12s ease-in-out infinite; }
+    .hero-shape-2 { width: 300px; height: 300px; background: var(--gold); bottom: 100px; left: -50px; animation: floatB 15s ease-in-out infinite; }
+    @keyframes floatA { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
+    @keyframes floatB { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-30px)} }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 120px 5% 60px;
+      max-width: 900px; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,169,110,0.15);
+      border: 1px solid rgba(201,169,110,0.35);
+      color: var(--gold-light);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease both;
+    }
+    .hero-badge i { font-size: 0.65rem; }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s ease 0.1s both;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.65);
+      font-weight: 300; letter-spacing: 0.02em;
+      max-width: 560px; margin: 0 auto 48px;
+      animation: fadeDown 0.8s ease 0.2s both;
+    }
+    @keyframes fadeDown {
+      from { opacity:0; transform:translateY(-20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* Search box */
+    .search-box {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(20px);
+      border-radius: 18px;
+      padding: 28px 32px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      animation: fadeUp 0.8s ease 0.35s both;
+      text-align: left;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    .search-tabs {
+      display: flex; gap: 6px; margin-bottom: 22px;
+    }
+    .search-tab {
+      flex: 1; padding: 9px;
+      background: var(--gray-light);
+      border: none; border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 500; color: var(--gray-dark);
+      cursor: pointer; transition: var(--transition);
+    }
+    .search-tab.active {
+      background: var(--navy); color: var(--white);
+    }
+    .search-fields {
+      display: grid; grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+      gap: 12px; align-items: end;
+    }
+    .search-field { display: flex; flex-direction: column; gap: 5px; }
+    .search-field label {
+      font-size: 0.72rem; font-weight: 600; color: var(--gray-dark);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .search-field select,
+    .search-field input {
+      padding: 11px 14px; border: 1.5px solid var(--gray-light);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      background: var(--white); outline: none;
+      transition: var(--transition); appearance: none;
+    }
+    .search-field select:focus,
+    .search-field input:focus {
+      border-color: var(--blue-bright);
+      box-shadow: 0 0 0 3px rgba(45,110,245,0.1);
+    }
+    .btn-search {
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--blue-bright), #1a5ad4);
+      color: var(--white); border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-search:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(45,110,245,0.4); }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 48px;
+      padding-top: 48px; animation: fadeUp 0.8s ease 0.5s both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600; color: var(--gold-light);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px;
+    }
+
+    /* ── SECTIONS GENERAL ── */
+    section { padding: 100px 5%; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--blue-bright);
+      display: block; margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+      color: var(--navy); line-height: 1.15;
+    }
+    .section-title strong { font-weight: 600; }
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 52px;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .section-desc {
+      font-size: 1rem; color: var(--gray-dark);
+      max-width: 460px; line-height: 1.7; margin-top: 10px;
+    }
+    .btn-outline {
+      padding: 11px 26px;
+      border: 1.5px solid var(--navy);
+      color: var(--navy); background: transparent;
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-primary {
+      padding: 13px 30px;
+      background: var(--navy); color: var(--white);
+      border: none; border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 9px;
+    }
+    .btn-primary:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #b8934a) !important;
+      color: var(--white) !important;
+    }
+    .btn-gold:hover { box-shadow: 0 8px 24px rgba(201,169,110,0.4) !important; }
+
+    /* ── PROPERTY CARDS ── */
+    .properties-section { background: var(--off-white); }
+    .properties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 26px;
+    }
+    .prop-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+      transition: var(--transition); cursor: pointer;
+      position: relative;
+    }
+    .prop-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .prop-card:hover .prop-img img { transform: scale(1.06); }
+    .prop-img {
+      position: relative; height: 210px; overflow: hidden;
+    }
+    .prop-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .prop-badge {
+      position: absolute; top: 14px; left: 14px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 5px 12px; border-radius: 100px;
+    }
+    .prop-badge.venta { background: var(--navy); color: var(--white); }
+    .prop-badge.alquiler { background: var(--blue-bright); color: var(--white); }
+    .prop-fav {
+      position: absolute; top: 14px; right: 14px;
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.92); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: var(--transition);
+      border: none;
+    }
+    .prop-fav i { color: var(--gray-mid); font-size: 0.85rem; transition: var(--transition); }
+    .prop-fav:hover i { color: #e05c5c; }
+    .prop-fav.active i { color: #e05c5c; }
+    .prop-body { padding: 20px 22px 22px; }
+    .prop-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; font-weight: 600; color: var(--navy);
+      line-height: 1; margin-bottom: 6px;
+    }
+    .prop-price span { font-size: 1rem; font-weight: 400; color: var(--gray-dark); }
+    .prop-type { font-size: 0.78rem; color: var(--gray-dark); margin-bottom: 10px; }
+    .prop-title {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 8px; line-height: 1.3;
+    }
+    .prop-location {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.82rem; color: var(--gray-dark);
+      margin-bottom: 14px;
+    }
+    .prop-location i { color: var(--blue-bright); font-size: 0.75rem; }
+    .prop-features {
+      display: flex; gap: 16px;
+      padding: 14px 0; border-top: 1px solid var(--gray-light);
+      margin-bottom: 14px;
+    }
+    .prop-feature {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.8rem; color: var(--gray-dark);
+    }
+    .prop-feature i { color: var(--navy-mid); font-size: 0.78rem; }
+    .btn-card {
+      width: 100%; padding: 10px;
+      background: transparent; border: 1.5px solid var(--gray-light);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem; font-weight: 600; color: var(--navy);
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn-card:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    /* ── FILTROS RÁPIDOS ── */
+    .filters-section { background: var(--white); padding: 60px 5%; }
+    .filters-title {
+      text-align: center; margin-bottom: 36px;
+    }
+    .filters-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px; max-width: 860px; margin: 0 auto;
+    }
+    .filter-btn {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      padding: 24px 30px; border-radius: var(--radius);
+      border: none; cursor: pointer; transition: var(--transition);
+      text-align: left; position: relative; overflow: hidden;
+    }
+    .filter-btn::before {
+      content: ''; position: absolute; inset: 0;
+      opacity: 0; transition: var(--transition);
+      background: rgba(255,255,255,0.08);
+    }
+    .filter-btn:hover::before { opacity: 1; }
+    .filter-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .filter-btn-icon {
+      width: 50px; height: 50px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .filter-btn-icon i { font-size: 1.3rem; }
+    .filter-btn-text { display: flex; flex-direction: column; }
+    .filter-btn-text strong {
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.01em;
+    }
+    .filter-btn-text span { font-size: 0.8rem; opacity: 0.75; margin-top: 2px; }
+    .fb-1 { background: linear-gradient(135deg, #0d1f3c, #1a3560); color: var(--white); }
+    .fb-1 .filter-btn-icon { background: rgba(201,169,110,0.2); }
+    .fb-1 .filter-btn-icon i { color: var(--gold); }
+    .fb-2 { background: linear-gradient(135deg, #1a3560, #1e4a8a); color: var(--white); }
+    .fb-2 .filter-btn-icon { background: rgba(255,255,255,0.15); }
+    .fb-2 .filter-btn-icon i { color: var(--white); }
+    .fb-3 { background: linear-gradient(135deg, #f8f7f5, #eef0f4); color: var(--navy); }
+    .fb-3 .filter-btn-icon { background: rgba(45,110,245,0.1); }
+    .fb-3 .filter-btn-icon i { color: var(--blue-bright); }
+    .fb-4 { background: linear-gradient(135deg, #eef0f4, #e4e8ef); color: var(--navy); }
+    .fb-4 .filter-btn-icon { background: rgba(13,31,60,0.08); }
+    .fb-4 .filter-btn-icon i { color: var(--navy); }
+
+    /* ── SERVICIOS ── */
+    .services-section { background: var(--navy); }
+    .services-section .section-label { color: var(--gold); }
+    .services-section .section-title { color: var(--white); }
+    .services-section .section-desc { color: rgba(255,255,255,0.55); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2px;
+    }
+    .service-card {
+      padding: 44px 36px;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--blue-bright));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.04); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 56px; height: 56px;
+      background: rgba(201,169,110,0.12);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+    }
+    .service-icon i { font-size: 1.4rem; color: var(--gold); }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; color: var(--white);
+      margin-bottom: 12px;
+    }
+    .service-desc { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    /* ── POR QUÉ ELEGIRNOS ── */
+    .why-section { background: var(--off-white); }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; max-width: 1000px; margin: 0 auto;
+    }
+    .why-item {
+      padding: 44px 48px; position: relative;
+      border: 1px solid var(--gray-light);
+      transition: var(--transition);
+    }
+    .why-item:hover { background: var(--white); box-shadow: var(--shadow-md); z-index: 1; }
+    .why-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 300; color: var(--gray-light);
+      line-height: 1; margin-bottom: 14px; user-select: none;
+    }
+    .why-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .why-desc { font-size: 0.875rem; color: var(--gray-dark); line-height: 1.7; }
+
+    /* ── TESTIMONIOS ── */
+    .testimonials-section { background: var(--white); }
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .testimonial-card {
+      padding: 34px 30px; border-radius: var(--radius);
+      border: 1.5px solid var(--gray-light);
+      transition: var(--transition); position: relative;
+    }
+    .testimonial-card:hover { border-color: var(--gold); box-shadow: var(--shadow-md); }
+    .testimonial-quote {
+      font-size: 3rem; line-height: 1; color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 14px; opacity: 0.6;
+    }
+    .testimonial-text {
+      font-size: 0.925rem; color: var(--gray-dark);
+      line-height: 1.75; margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .testimonial-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; border: 2px solid var(--gray-light);
+    }
+    .testimonial-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+    .testimonial-role { font-size: 0.78rem; color: var(--gray-mid); margin-top: 2px; }
+    .stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 16px; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      position: relative; overflow: hidden;
+      padding: 100px 5%;
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a3560 100%);
+      text-align: center;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=60') center/cover;
+      opacity: 0.07;
+    }
+    .cta-bg-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18vw; font-weight: 700;
+      color: rgba(255,255,255,0.03);
+      white-space: nowrap; pointer-events: none; user-select: none;
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px; display: block;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 300;
+      color: var(--white); line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .cta-title em { font-style: italic; color: var(--gold-light); }
+    .cta-desc {
+      font-size: 1rem; color: rgba(255,255,255,0.55);
+      max-width: 500px; margin: 0 auto 40px; line-height: 1.7;
+    }
+
+    /* ── CONTACTO ── */
+    .contact-section { background: var(--off-white); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; align-items: start;
+    }
+    .contact-info-item {
+      display: flex; gap: 16px; margin-bottom: 28px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--navy); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon i { color: var(--gold); font-size: 0.95rem; }
+    .contact-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 4px; }
+    .contact-value { font-size: 0.95rem; color: var(--navy); font-weight: 500; }
+    .map-container {
+      border-radius: var(--radius); overflow: hidden;
+      height: 200px; margin-top: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .map-container iframe { width: 100%; height: 100%; border: none; }
+    .contact-form {
+      background: var(--white); padding: 40px;
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 0.78rem; font-weight: 700;
+      color: var(--gray-dark); text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--gray-light); border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+      background: var(--white); outline: none; transition: var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-bright);
+      box-shadow: 0 0 0 3px rgba(45,110,245,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f1e;
+      padding: 70px 5% 30px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px; padding-bottom: 50px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 30px;
+    }
+    .footer-brand-logo { margin-bottom: 16px; }
+    .footer-brand-desc { font-size: 0.875rem; line-height: 1.7; max-width: 280px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 22px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5); font-size: 0.9rem;
+      text-decoration: none; transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--blue-bright); color: var(--white); transform: translateY(-2px); }
+    .social-btn.wa:hover { background: #25d366; }
+    .social-btn.ig:hover { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+    .footer-col-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+      margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      color: rgba(255,255,255,0.45); text-decoration: none;
+      font-size: 0.875rem; transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--gold); padding-left: 4px; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.78rem;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(8,15,30,0.85); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    .modal {
+      background: var(--white); border-radius: 20px;
+      max-width: 700px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      animation: slideUp 0.35s ease;
+    }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    .modal-img { height: 280px; overflow: hidden; border-radius: 20px 20px 0 0; }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+    .modal-body { padding: 32px 36px; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: none;
+      font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .modal-close:hover { background: #fee; }
+    .modal-wrap { position: relative; }
+    .modal-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 600; color: var(--navy);
+    }
+    .modal-title { font-size: 1.2rem; font-weight: 700; color: var(--navy); margin: 8px 0; }
+    .modal-location { font-size: 0.9rem; color: var(--gray-dark); margin-bottom: 20px; }
+    .modal-features {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      padding: 18px 0; border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light);
+      margin-bottom: 18px;
+    }
+    .modal-feature { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .modal-feature i { font-size: 1.1rem; color: var(--blue-bright); }
+    .modal-feature span { font-size: 0.78rem; color: var(--gray-dark); }
+    .modal-feature strong { font-size: 1rem; color: var(--navy); }
+    .modal-desc { font-size: 0.9rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 24px; }
+
+    /* ── SCROLL TO TOP ── */
+    .scroll-top {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      border: none; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: var(--transition);
+      opacity: 0; transform: translateY(10px); pointer-events: none;
+      box-shadow: var(--shadow-md);
+    }
+    .scroll-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .scroll-top:hover { background: var(--blue-bright); transform: translateY(-2px); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+      .search-fields { grid-template-columns: 1fr 1fr; }
+      .btn-search { grid-column: 1/-1; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 72px; left: 0; right: 0;
+        background: var(--white); padding: 16px;
+        box-shadow: var(--shadow-md); gap: 4px;
+      }
+      .nav-hamburger { display: flex; }
+      .hero-stats { gap: 24px; }
+      .search-fields { grid-template-columns: 1fr; }
+      .filters-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .properties-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 70px 5%; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-stats { flex-wrap: wrap; justify-content: center; gap: 16px 32px; }
+    }
+
+    /* ── ANIMATIONS ON SCROLL ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5L12 3l9 6.5V21H15v-5h-6v5H3V9.5z"/></svg>
+    </div>
+    <div class="nav-logo-text">
+      <span>Tradin</span>
+      <span>Inmobiliaria</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#propiedades">Propiedades</a></li>
+    <li><a href="#filtros">Comprar</a></li>
+    <li><a href="#filtros">Alquilar</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#contacto" class="btn-nav-cta">Publicar Propiedad</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-star"></i> Portal Inmobiliario Rosario</div>
+    <h1 class="hero-title">Encontrá tu<br/><em>próximo hogar</em></h1>
+    <p class="hero-subtitle">Propiedades en venta y alquiler con asesoramiento profesional en Rosario y alrededores</p>
+
+    <div class="search-box">
+      <div class="search-tabs">
+        <button class="search-tab active" onclick="setTab(this,'Comprar')">Comprar</button>
+        <button class="search-tab" onclick="setTab(this,'Alquilar')">Alquilar</button>
+        <button class="search-tab" onclick="setTab(this,'Tasación')">Tasación</button>
+      </div>
+      <div class="search-fields">
+        <div class="search-field">
+          <label>Tipo</label>
+          <select>
+            <option value="">Todos</option>
+            <option>Casa</option>
+            <option>Departamento</option>
+            <option>Local</option>
+            <option>Terreno</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>Operación</label>
+          <select>
+            <option>Venta</option>
+            <option>Alquiler</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label>Ubicación</label>
+          <input type="text" placeholder="Barrio, calle o zona..."/>
+        </div>
+        <div class="search-field">
+          <label>Precio mínimo</label>
+          <input type="number" placeholder="USD 0"/>
+        </div>
+        <div class="search-field">
+          <label>Precio máximo</label>
+          <input type="number" placeholder="Sin límite"/>
+        </div>
+        <button class="btn-search" onclick="alert('Función de búsqueda disponible en la versión completa')">
+          <i class="fas fa-search"></i> Buscar Propiedades
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">340+</div>
+        <div class="hero-stat-label">Propiedades</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1.200+</div>
+        <div class="hero-stat-label">Clientes felices</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">15</div>
+        <div class="hero-stat-label">Años de experiencia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROPIEDADES DESTACADAS ─── -->
+<section class="properties-section" id="propiedades">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Oportunidades seleccionadas</span>
+      <h2 class="section-title">Propiedades <strong>Destacadas</strong></h2>
+      <p class="section-desc">Selección exclusiva de propiedades en las mejores zonas de Rosario</p>
+    </div>
+    <a href="#" class="btn-outline">Ver todas <i class="fas fa-arrow-right"></i></a>
+  </div>
+
+  <div class="properties-grid" id="propertiesGrid">
+    <!-- Generated by JS -->
+  </div>
+</section>
+
+<!-- ─── FILTROS RÁPIDOS ─── -->
+<section class="filters-section" id="filtros">
+  <div class="filters-title reveal">
+    <span class="section-label">Explorar por categoría</span>
+    <h2 class="section-title">¿Qué estás <strong>buscando?</strong></h2>
+  </div>
+  <div class="filters-grid reveal reveal-delay-1">
+    <button class="filter-btn fb-1" onclick="filterProps('casa','venta')">
+      <div class="filter-btn-icon"><i class="fas fa-home"></i></div>
+      <div class="filter-btn-text">
+        <strong>Casas en Venta</strong>
+        <span>Encontrá tu hogar ideal</span>
+      </div>
+    </button>
+    <button class="filter-btn fb-2" onclick="filterProps('casa','alquiler')">
+      <div class="filter-btn-icon"><i class="fas fa-key"></i></div>
+      <div class="filter-btn-text">
+        <strong>Casas en Alquiler</strong>
+        <span>Ingresá cuanto antes</span>
+      </div>
+    </button>
+    <button class="filter-btn fb-3" onclick="filterProps('departamento','venta')">
+      <div class="filter-btn-icon"><i class="fas fa-building"></i></div>
+      <div class="filter-btn-text">
+        <strong>Deptos en Venta</strong>
+        <span>Inversión segura y rentable</span>
+      </div>
+    </button>
+    <button class="filter-btn fb-4" onclick="filterProps('departamento','alquiler')">
+      <div class="filter-btn-icon"><i class="fas fa-city"></i></div>
+      <div class="filter-btn-text">
+        <strong>Deptos en Alquiler</strong>
+        <span>Flexible y accesible</span>
+      </div>
+    </button>
+  </div>
+</section>
+
+<!-- ─── SERVICIOS ─── -->
+<section class="services-section" id="servicios">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Lo que hacemos</span>
+      <h2 class="section-title" style="color:var(--white)">Nuestros <strong>Servicios</strong></h2>
+      <p class="section-desc">Soluciones integrales para compradores, vendedores e inversores</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon"><i class="fas fa-handshake"></i></div>
+      <h3 class="service-title">Compra de Propiedades</h3>
+      <p class="service-desc">Te acompañamos en cada etapa de la compra: búsqueda, negociación, escrituración y entrega de llaves.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+      <h3 class="service-title">Alquiler de Propiedades</h3>
+      <p class="service-desc">Gestionamos todos los trámites, contratos y garantías para propietarios e inquilinos.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+      <h3 class="service-title">Tasación Profesional</h3>
+      <p class="service-desc">Valuación precisa y actualizada de tu propiedad con informe detallado del mercado.</p>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3 class="service-title">Administración</h3>
+      <p class="service-desc">Administramos tu propiedad con transparencia: cobranzas, mantenimiento y reportes mensuales.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── POR QUÉ ELEGIRNOS ─── -->
+<section class="why-section">
+  <div class="section-header reveal" style="margin-bottom:0">
+    <div>
+      <span class="section-label">Nuestras fortalezas</span>
+      <h2 class="section-title">¿Por qué elegir<br/><strong>Tradin?</strong></h2>
+    </div>
+  </div>
+  <div class="why-grid" style="margin-top:52px">
+    <div class="why-item reveal">
+      <div class="why-number">01</div>
+      <h3 class="why-title">Experiencia en el Mercado</h3>
+      <p class="why-desc">Más de 15 años en el mercado inmobiliario rosarino nos avalan. Conocemos cada barrio, cada precio, cada tendencia.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-1">
+      <div class="why-number">02</div>
+      <h3 class="why-title">Atención Personalizada</h3>
+      <p class="why-desc">Un asesor exclusivo para cada cliente. Te escuchamos, entendemos tus necesidades y te guiamos hasta el cierre.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-2">
+      <div class="why-number">03</div>
+      <h3 class="why-title">Amplia Cartera de Propiedades</h3>
+      <p class="why-desc">Más de 340 propiedades activas en Rosario y Gran Rosario. Seguro encontramos lo que buscás.</p>
+    </div>
+    <div class="why-item reveal reveal-delay-3">
+      <div class="why-number">04</div>
+      <h3 class="why-title">Asesoramiento Legal y Financiero</h3>
+      <p class="why-desc">Equipo propio de abogados y contadores para garantizar operaciones seguras, claras y libres de sorpresas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIOS ─── -->
+<section class="testimonials-section">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Lo que dicen nuestros clientes</span>
+      <h2 class="section-title">Historias de <strong>Éxito</strong></h2>
+    </div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Encontramos el departamento de nuestros sueños en menos de dos semanas. La atención fue impecable de principio a fin. Sin dudas los recomiendo a todo el mundo.</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/150?img=47" alt="Valentina Gómez" class="testimonial-avatar"/>
+        <div>
+          <div class="testimonial-name">Valentina Gómez</div>
+          <div class="testimonial-role">Compradora · Centro Rosario</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Vendí mi casa en tiempo récord y al precio que esperaba. El equipo de Tradin es muy profesional, transparente y siempre disponible ante cualquier consulta.</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Martín Elizalde" class="testimonial-avatar"/>
+        <div>
+          <div class="testimonial-name">Martín Elizalde</div>
+          <div class="testimonial-role">Vendedor · Zona Norte</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Alquilé mi propiedad a través de Tradin y el servicio de administración fue excelente. Todo ordenado, pagos en término y comunicación fluida cada mes.</p>
+      <div class="testimonial-author">
+        <img src="https://i.pravatar.cc/150?img=32" alt="Carolina Benítez" class="testimonial-avatar"/>
+        <div>
+          <div class="testimonial-name">Carolina Benítez</div>
+          <div class="testimonial-role">Propietaria · Echesortu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="cta-bg-text">TRADIN</div>
+  <div class="cta-content reveal">
+    <span class="cta-label"><i class="fas fa-gem"></i> &nbsp; Propietarios</span>
+    <h2 class="cta-title">¿Querés vender<br/><em>tu propiedad?</em></h2>
+    <p class="cta-desc">Publicá gratis y llegá a miles de compradores reales. Nuestros asesores te acompañan en todo el proceso.</p>
+    <a href="#contacto" class="btn-primary btn-gold" style="font-size:1rem; padding:16px 40px;">
+      <i class="fas fa-plus-circle"></i> Publicar Propiedad
+    </a>
+  </div>
+</section>
+
+<!-- ─── CONTACTO ─── -->
+<section class="contact-section" id="contacto">
+  <div class="section-header reveal">
+    <div>
+      <span class="section-label">Estamos para ayudarte</span>
+      <h2 class="section-title">Ponete en <strong>Contacto</strong></h2>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <div class="contact-label">Dirección</div>
+          <div class="contact-value">Córdoba 1240, Piso 3<br/>Rosario, Santa Fe</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <div class="contact-label">Teléfono</div>
+          <div class="contact-value">+54 341 555 7890</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">info@tradinrosario.com.ar</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <div class="contact-label">Horario</div>
+          <div class="contact-value">Lun – Vie: 9:00 – 18:00 hs<br/>Sáb: 9:00 – 13:00 hs</div>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26888.54326098066!2d-60.63932!3d-32.94682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b652e5b5f5f5e5%3A0x5b6e5e5e5e5e5e5e!2sRosario%2C%20Santa%20Fe!5e0!3m2!1ses!2sar!4v1700000000000"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+    </div>
+    <div class="contact-form reveal reveal-delay-1">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--navy);margin-bottom:6px">Envianos un mensaje</h3>
+      <p style="font-size:0.875rem;color:var(--gray-dark);margin-bottom:24px">Te respondemos en menos de 24 horas hábiles</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo"/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+54 341 ..."/>
+        </div>
+        <div class="form-group">
+          <label>Consulta sobre</label>
+          <select>
+            <option>Compra de propiedad</option>
+            <option>Alquiler</option>
+            <option>Venta / publicar</option>
+            <option>Tasación</option>
+            <option>Otro</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea placeholder="Contanos qué estás buscando o en qué podemos ayudarte..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;font-size:0.95rem;padding:14px;" onclick="handleFormSubmit(event)">
+        <i class="fas fa-paper-plane"></i> Enviar Mensaje
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-logo">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--navy-mid),var(--blue-bright));border-radius:9px;display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--gold)"><path d="M3 9.5L12 3l9 6.5V21H15v-5h-6v5H3V9.5z"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.9)">Tradin</div>
+            <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold)">Inmobiliaria</div>
+          </div>
+        </div>
+      </div>
+      <p class="footer-brand-desc">Tu inmobiliaria de confianza en Rosario. Más de 15 años conectando familias con su hogar ideal.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Links Rápidos</div>
+      <ul class="footer-links">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#propiedades">Propiedades</a></li>
+        <li><a href="#filtros">Comprar</a></li>
+        <li><a href="#filtros">Alquilar</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Propiedades</div>
+      <ul class="footer-links">
+        <li><a href="#">Casas en Venta</a></li>
+        <li><a href="#">Deptos en Venta</a></li>
+        <li><a href="#">Casas en Alquiler</a></li>
+        <li><a href="#">Deptos en Alquiler</a></li>
+        <li><a href="#">Propiedades Premium</a></li>
+        <li><a href="#">Barrios Privados</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Servicios</div>
+      <ul class="footer-links">
+        <li><a href="#">Compra y Venta</a></li>
+        <li><a href="#">Alquiler</a></li>
+        <li><a href="#">Tasación Gratuita</a></li>
+        <li><a href="#">Administración</a></li>
+        <li><a href="#">Asesoramiento Legal</a></li>
+        <li><a href="#">Publicar Propiedad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Tradin Inmobiliaria. Todos los derechos reservados.</span>
+    <span><a href="#">Términos y Condiciones</a> · <a href="#">Política de Privacidad</a></span>
+  </div>
+</footer>
+
+<!-- ─── SCROLL TOP ─── -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ─── MODAL ─── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-wrap">
+    <button class="modal-close" onclick="closeModalBtn()"><i class="fas fa-times"></i></button>
+    <div class="modal" id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const properties = [
+  {
+    id:1, tipo:"Departamento", op:"venta",
+    titulo:"Departamento Moderno en el Centro",
+    precio:"USD 95.000", barrio:"Centro, Rosario",
+    m2:62, dorm:2, baños:1,
+    img:"https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
+    desc:"Luminoso departamento con terminaciones de primera. Cocina integrada, balcón con vista al boulevard, amenities del edificio. Ideal para vivir o invertir.",
+    amenities:["Balcón","Amenities","Cochera op."]
+  },
+  {
+    id:2, tipo:"Casa", op:"venta",
+    titulo:"Casa con Patio en Zona Norte",
+    precio:"USD 185.000", barrio:"Fisherton, Rosario",
+    m2:180, dorm:3, baños:2,
+    img:"https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80",
+    desc:"Amplia casa con gran patio arbolado, parrilla y dependencia de servicio. Garage doble y piscina de fácil instalación. Barrio tranquilo y seguro.",
+    amenities:["Patio","Garage","Parrilla"]
+  },
+  {
+    id:3, tipo:"Departamento", op:"alquiler",
+    titulo:"Departamento Amueblado",
+    precio:"$350.000/mes", barrio:"Pichincha, Rosario",
+    m2:45, dorm:1, baños:1,
+    img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80",
+    desc:"Departamento totalmente amueblado y equipado. Listo para mudarse. A pasos del parque y de los principales accesos. Ideal para profesionales.",
+    amenities:["Amueblado","WiFi","Cocina eq."]
+  },
+  {
+    id:4, tipo:"Casa", op:"venta",
+    titulo:"Casa con Piscina",
+    precio:"USD 320.000", barrio:"Funes, Gran Rosario",
+    m2:280, dorm:4, baños:3,
+    img:"https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&q=80",
+    desc:"Espectacular residencia con piscina, quincho cubierto y jardín paisajístico. Ubicada en zona residencial premium con acceso controlado.",
+    amenities:["Piscina","Quincho","Jardín"]
+  },
+  {
+    id:5, tipo:"Departamento", op:"venta",
+    titulo:"Departamento Vista al Río",
+    precio:"USD 145.000", barrio:"La Ribera, Rosario",
+    m2:88, dorm:2, baños:2,
+    img:"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80",
+    desc:"Excepcional vista al Río Paraná desde el living y dormitorio principal. Edificio con amenities completos: gym, rooftop y salón de eventos.",
+    amenities:["Vista al río","Gym","Rooftop"]
+  },
+  {
+    id:6, tipo:"Casa", op:"venta",
+    titulo:"Casa Familiar 3 Dormitorios",
+    precio:"USD 145.000", barrio:"Alberdi, Rosario",
+    m2:145, dorm:3, baños:2,
+    img:"https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&q=80",
+    desc:"Casa ideal para familia numerosa. Dos plantas, patio trasero con parrilla, garage y cuarto de servicio. Barrio consolidado con todos los servicios.",
+    amenities:["Parrilla","Garage","2 plantas"]
+  },
+  {
+    id:7, tipo:"Departamento", op:"alquiler",
+    titulo:"Departamento 2 Ambientes",
+    precio:"$280.000/mes", barrio:"República de la Sexta, Rosario",
+    m2:42, dorm:1, baños:1,
+    img:"https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80",
+    desc:"Clásico departamento rosarino renovado por completo. Piso de madera, cocina actualizada y baño moderno. Luminoso y bien comunicado.",
+    amenities:["Renovado","Luminoso","Expensas bajas"]
+  },
+  {
+    id:8, tipo:"Casa", op:"alquiler",
+    titulo:"Casa Minimalista",
+    precio:"$480.000/mes", barrio:"Echesortu, Rosario",
+    m2:120, dorm:2, baños:2,
+    img:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=80",
+    desc:"Casa de diseño con estética minimalista. Grandes ventanales, materiales de primera calidad y jardín privado. Perfecta para quien valora el buen gusto.",
+    amenities:["Diseño","Jardín privado","Estudio"]
+  },
+  {
+    id:9, tipo:"Departamento", op:"venta",
+    titulo:"Departamento Premium",
+    precio:"USD 210.000", barrio:"Puerto Norte, Rosario",
+    m2:110, dorm:3, baños:2,
+    img:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80",
+    desc:"Departamento de alta gama en el polo más moderno de Rosario. Terminaciones de lujo, cochera cubierta, baulera y amenities de categoría.",
+    amenities:["Lujo","Cochera","Baulera"]
+  },
+  {
+    id:10, tipo:"Casa", op:"venta",
+    titulo:"Casa en Barrio Privado",
+    precio:"USD 420.000", barrio:"Roldán, Gran Rosario",
+    m2:320, dorm:4, baños:3,
+    img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80",
+    desc:"Residencia exclusiva en barrio cerrado con seguridad 24hs. Piscina, cancha de tenis y espacios verdes privados. La mejor calidad de vida.",
+    amenities:["Barrio cerrado","Piscina","Cancha"]
+  }
+];
+
+/* ── RENDER CARDS ── */
+function renderCards(arr){
+  const grid = document.getElementById('propertiesGrid');
+  grid.innerHTML = arr.map(p => `
+    <div class="prop-card" style="animation:fadeUp 0.5s ease both">
+      <div class="prop-img">
+        <img src="${p.img}" alt="${p.titulo}" loading="lazy"/>
+        <span class="prop-badge ${p.op}">${p.op === 'venta' ? 'VENTA' : 'ALQUILER'}</span>
+        <button class="prop-fav" onclick="toggleFav(this,event)"><i class="far fa-heart"></i></button>
+      </div>
+      <div class="prop-body">
+        <div class="prop-price">${p.precio}</div>
+        <div class="prop-type">${p.tipo}</div>
+        <div class="prop-title">${p.titulo}</div>
+        <div class="prop-location"><i class="fas fa-map-marker-alt"></i>${p.barrio}</div>
+        <div class="prop-features">
+          <div class="prop-feature"><i class="fas fa-ruler-combined"></i>${p.m2} m²</div>
+          <div class="prop-feature"><i class="fas fa-bed"></i>${p.dorm} dorm.</div>
+          <div class="prop-feature"><i class="fas fa-bath"></i>${p.baños} baño${p.baños>1?'s':''}</div>
+        </div>
+        <button class="btn-card" onclick="openModal(${p.id})">Ver detalles</button>
+      </div>
+    </div>
+  `).join('');
+  revealObserver();
+}
+
+renderCards(properties);
+
+/* ── FILTER ── */
+function filterProps(tipo, op){
+  const filtered = properties.filter(p =>
+    p.tipo.toLowerCase().includes(tipo) && p.op === op
+  );
+  renderCards(filtered.length ? filtered : properties);
+  document.getElementById('propiedades').scrollIntoView({behavior:'smooth'});
+}
+
+/* ── FAV ── */
+function toggleFav(btn,e){
+  e.stopPropagation();
+  btn.classList.toggle('active');
+  const icon = btn.querySelector('i');
+  icon.className = btn.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
+}
+
+/* ── MODAL ── */
+function openModal(id){
+  const p = properties.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-img">
+      <img src="${p.img.replace('w=600','w=800')}" alt="${p.titulo}"/>
+    </div>
+    <div class="modal-body">
+      <span class="prop-badge ${p.op}" style="display:inline-block;margin-bottom:12px">${p.op === 'venta' ? 'VENTA' : 'ALQUILER'}</span>
+      <div class="modal-price">${p.precio}</div>
+      <div class="modal-title">${p.titulo}</div>
+      <div class="modal-location"><i class="fas fa-map-marker-alt" style="color:var(--blue-bright);margin-right:6px"></i>${p.barrio}</div>
+      <div class="modal-features">
+        <div class="modal-feature"><i class="fas fa-ruler-combined"></i><strong>${p.m2}</strong><span>m²</span></div>
+        <div class="modal-feature"><i class="fas fa-bed"></i><strong>${p.dorm}</strong><span>Dorm.</span></div>
+        <div class="modal-feature"><i class="fas fa-bath"></i><strong>${p.baños}</strong><span>Baños</span></div>
+        ${p.amenities.map(a=>`<div class="modal-feature"><i class="fas fa-check-circle" style="color:var(--gold)"></i><strong style="font-size:0.8rem">${a}</strong><span></span></div>`).join('')}
+      </div>
+      <p class="modal-desc">${p.desc}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-primary" style="flex:1;justify-content:center" onclick="alert('Consulta enviada. Nos contactaremos a la brevedad.')">
+          <i class="fas fa-phone"></i> Consultar
+        </button>
+        <button class="btn-outline" style="flex:1;justify-content:center" onclick="alert('Compartido!')">
+          <i class="fas fa-share-alt"></i> Compartir
+        </button>
+      </div>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e){ if(e.target === document.getElementById('modalOverlay')) closeModalBtn(); }
+function closeModalBtn(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── NAVBAR SCROLL ── */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+});
+
+/* ── HAMBURGER ── */
+function toggleMenu(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+/* ── SEARCH TAB ── */
+function setTab(btn, label){
+  document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ── SCROLL REVEAL ── */
+function revealObserver(){
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  els.forEach(el => obs.observe(el));
+}
+revealObserver();
+
+/* ── FORM SUBMIT ── */
+function handleFormSubmit(e){
+  e.preventDefault();
+  const btn = e.target;
+  btn.innerHTML = '<i class="fas fa-check"></i> ¡Mensaje enviado!';
+  btn.style.background = '#1db954';
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensaje';
+    btn.style.background = '';
+  }, 3000);
+}
+</script>
+</body>
+</html>
